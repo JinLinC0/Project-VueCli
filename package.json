@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@types/node": "^22.13.10",
+    "lodash": "^4.17.21",
     "vue": "^3.4.37",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.16",
     "@vitejs/plugin-vue": "^5.1.2",
     "path": "^0.12.7",
     "typescript": "^5.5.3",

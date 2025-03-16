@@ -1,4 +1,3 @@
-// 该文件抽离出一些别名的配置，后续修改别名相关的配置时，只需修改该文件即可
 import path from 'path'
 import { AliasOptions } from 'vite'
 
