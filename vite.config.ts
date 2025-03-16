@@ -2,6 +2,7 @@ import { ConfigEnv, defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import alias from './vite/alias'
 import { parseEnv } from './vite/util'
+import { setupPlugins } from './vite/plugins'
 
 /***
  * @description 相关插件的配置
@@ -18,7 +19,8 @@ export default ({ command, mode }: ConfigEnv) => {
   // parseEnv(env)最后读取到配置文件的数据，修复了其值都是字符串类型
   parseEnv(env)
   return {
-    plugins: [vue()],
+    // plugins: [vue()],
+    plugins: setupPlugins(isBuild, env),
     resolve: {
       alias
     }

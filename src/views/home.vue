@@ -1,5 +1,5 @@
 <template>
-home
+    <div class="bg-red-500 text-white p-10">home</div>
 </template>
 
 <script setup lang="ts">
