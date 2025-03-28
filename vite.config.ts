@@ -1,5 +1,4 @@
-import { ConfigEnv, defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { ConfigEnv, loadEnv } from 'vite'
 import alias from './vite/alias'
 import { parseEnv } from './vite/util'
 import { setupPlugins } from './vite/plugins'
@@ -15,7 +14,7 @@ export default ({ command, mode }: ConfigEnv) => {
   // 获取配置文件的目录
   const root = process.cwd()
   // 提取配置文件中的环境变量，获取.env文件中的所有配置项，但是配置项的具体值是字符串类型
-  const env = loadEnv(mode, root)
+  const env = loadEnv(mode, root) as any
   // parseEnv(env)最后读取到配置文件的数据，修复了其值都是字符串类型
   parseEnv(env)
   return {
