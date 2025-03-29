@@ -5,3 +5,6 @@
 - `tailwindcss`: tailwindcss插件的相关配置文件夹
   - `index.ts`: tailwindcss插件的入口配置文件
   - `tailwindcss.css`: tailwindcss插件的样式文件引入
+- `axios`: axios插件的相关配置文件夹
+  - `index.ts`: axios插件的入口配置文件
+  - `Axios.ts`: axios插件的封装文件
