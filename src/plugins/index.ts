@@ -15,7 +15,6 @@ export function setupPlugins(app: App) {
 function autoRegisterComponent(app: App) {
     // 加载components文件夹下的所有组件
     const components = import.meta.glob('../components/**/*.vue')
-    console.log(components)
     // 遍历components文件夹，提取组件的文件名，建议组件文件名也使用驼峰命名，如loginButton.vue
     Object.keys(components).forEach((key) => {
         const componentName = key.split('/').pop()?.split('.').shift() as string

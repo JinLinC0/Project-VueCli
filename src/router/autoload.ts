@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
+import { env } from "@/utils/helper"
 // 自动加载路由，目前只支持layouts和views文件夹，views文件夹中的.vue文件作为子路由（和layouts同子目录的生效）
 
 // layouts文件夹中模块页面文件的路由自动注册
@@ -58,5 +59,8 @@ function getRoutes() {
     return layoutRoutes
 }
 
+// 根据环境变量，决定是否加载路由
+const routes = env.VITE_ROUTER_AUTOLOAD ? getRoutes() : [] as RouteRecordRaw[]
+
 // 最终返回一个动态路由
-export default getRoutes()
+export default routes
