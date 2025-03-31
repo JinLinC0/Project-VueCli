@@ -18,6 +18,14 @@ export default ({ command, mode }: ConfigEnv) => {
   // parseEnv(env)最后读取到配置文件的数据，修复了其值都是字符串类型
   parseEnv(env)
   return {
+    // 设置scss的api类型为modern-compiler
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    },
     // plugins: [vue()],
     plugins: setupPlugins(isBuild, env),
     resolve: {

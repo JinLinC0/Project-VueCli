@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@types/node": "^22.13.10",
+    "@vee-validate/i18n": "^4.15.0",
+    "@vee-validate/rules": "^4.15.0",
     "axios": "^1.8.4",
     "lodash": "^4.17.21",
+    "vee-validate": "^4.15.0",
     "vue": "^3.4.37",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.16",
