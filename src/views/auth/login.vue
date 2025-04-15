@@ -24,7 +24,7 @@
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login-input {
     @apply w-full border border-gray-300 rounded-md p-2 mt-4 outline-none
     placeholder:text-xs focus:border-blue-500 duration-300
