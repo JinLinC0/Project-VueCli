@@ -1,0 +1,10 @@
+// 单行输入框的全局样式
+.my-input {
+    @apply w-full border border-gray-300 rounded-md p-2 mt-4 outline-none
+    placeholder:text-xs focus:border-blue-500 duration-300
+}
+
+// 单行输入框错误消息的全局样式
+.my-error {
+    @apply rounded-md bg-red-400 text-white text-xs px-2 mt-2
+}

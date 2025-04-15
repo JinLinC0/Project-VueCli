@@ -8,9 +8,9 @@ yup.setLocale({
     },
     // 字符串类型
     string: {
-        email: '邮箱格式错误',
-        min: '最少${min}个字符',
-        max: '最多${max}个字符',
+        email: '${label}邮箱格式错误',
+        min: '${label}最少${min}个字符',
+        max: '${label}最多${max}个字符',
         length: '必须为${length}个字符',
     },
     // 数字类型

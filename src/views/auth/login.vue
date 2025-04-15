@@ -1,14 +1,17 @@
 <template>
-    <div class="bg-slate-400 h-screen flex justify-center md:items-center p-5">
+    <Form class="bg-slate-400 h-screen flex justify-center md:items-center p-5" @submit="onSubmit" :validation-schema="schema">
         <div class="w-[720px] bg-slate-100 md:-translate-y-16 md:grid grid-cols-2 rounded-md shadow-2xl overflow-hidden">
-            <div class="hidden md:block">
-                <img src="/images/login.jpg" class="h-80 w-full object-cover" />
+            <div class="hidden md:block relative">
+                <img src="/images/login.jpg" class="absolute h-full w-full object-cover" />
             </div>
             <div class="p-6">
                 <h2 class="text-center text-gray-600 text-lg">用户登录</h2>
                 <div class="mt-5">
-                    <input type="text" placeholder="请输入用户名" class="login-input" />
-                    <input type="text" placeholder="请输入密码" class="login-input mt-5" />
+                    <Field name="account" placeholder="请输入用户名" class="my-input" />
+                    <ErrorMessage name="account" as="div" class="my-error" />
+
+                    <Field name="password" placeholder="请输入密码" type="password" class="my-input" />
+                    <ErrorMessage name="password" as="div" class="my-error" />
                 </div>
                 <button class="login-button mt-8">登录</button>
                 <div class="flex gap-2 justify-center mt-5">
@@ -17,18 +20,24 @@
                 </div>
             </div>
         </div>
-    </div>
+    </Form>
 </template>
 
 <script setup>
+import v from '@/plugins/validate'
+
+// 提取出validate包中的几个组件，form表单，字段和错误消息
+const { Form, Field, ErrorMessage } = v
+
+// 通过yup进行统一的验证管理
+const schema = v.yup.object({
+    account: v.yup.string().required().label("账号").matches(/.+@.+|\d{11}/, "请输入正确的邮箱或手机号"),
+    password: v.yup.string().required().min(3).label("密码")
+})
 
 </script>
 
 <style lang="scss" scoped>
-.login-input {
-    @apply w-full border border-gray-300 rounded-md p-2 mt-4 outline-none
-    placeholder:text-xs focus:border-blue-500 duration-300
-}
 .login-button {
     @apply bg-blue-500 text-white w-full rounded-md py-2 hover:bg-blue-600 duration-300
 }
