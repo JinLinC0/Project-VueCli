@@ -22,14 +22,14 @@ export default [
     },
     {
         url: '/api/login',
-        method: 'get',
+        method: 'post',
         response: () => {
             return {
                 code: 200,
                 message: '登录成功',
                 type: 'success',
                 data: {
-                    token: Random.string(32),
+                    token: Random.string(10),   // 模拟生成一个10位的随机字符串作为token
                 }
             }
         }

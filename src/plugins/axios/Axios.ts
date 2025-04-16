@@ -20,7 +20,7 @@ export default class Axios {
             } catch (error) {
                 reject(error)
             }
-        })
+        }) as Promise<D>
     }
 
     // 添加拦截器

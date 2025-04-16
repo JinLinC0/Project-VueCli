@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import userApi from '@/api/userApi'
 import v from '@/plugins/validate'
 
 // 提取出validate包中的几个组件，form表单，字段和错误消息
@@ -34,6 +35,13 @@ const schema = v.yup.object({
     account: v.yup.string().required().label("账号").matches(/.+@.+|\d{11}/, "请输入正确的邮箱或手机号"),
     password: v.yup.string().required().min(3).label("密码")
 })
+
+// 表单提交
+const onSubmit = async (values) => {
+    const { data: { token } } = await userApi.login(values)
+    // 将token存储到本地
+    localStorage.setItem("token", token)
+}
 
 </script>
 
