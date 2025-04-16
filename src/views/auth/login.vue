@@ -15,15 +15,15 @@
                 </div>
                 <button class="login-button mt-8">登录</button>
                 <div class="flex gap-2 justify-center mt-5">
-                    <a href class="text-xs text-gray-700 hover:text-blue-300">找回密码</a>
-                    <a href class="text-xs text-gray-700 hover:text-blue-300">配套笔记</a>
+                    <a class="text-xs text-gray-700 hover:text-blue-300">找回密码</a>
+                    <a class="text-xs text-gray-700 hover:text-blue-300">配套笔记</a>
                 </div>
             </div>
         </div>
     </Form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import userApi from '@/api/userApi'
 import v from '@/plugins/validate'
 import { store } from '@/utils'
@@ -38,7 +38,7 @@ const schema = v.yup.object({
 })
 
 // 表单提交
-const onSubmit = async (values) => {
+const onSubmit = async (values: any) => {
     const { data: { token } } = await userApi.login(values)
     // 将token存储到本地
     localStorage.setItem("token", token)
@@ -47,7 +47,12 @@ const onSubmit = async (values) => {
         expire: 100, token
     })
 }
+</script>
 
+<script lang="ts">
+export default {
+    route: { name: 'login' }
+}
 </script>
 
 <style lang="scss" scoped>

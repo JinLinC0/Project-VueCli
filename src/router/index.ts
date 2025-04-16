@@ -2,6 +2,7 @@ import { App } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 import layoutRoutes from "./autoload";
+import guard from "./guard";
 
 // 创建路由
 const router = createRouter({
@@ -13,6 +14,8 @@ const router = createRouter({
 
 // 将路由封装成函数，实现具名导出
 export function setupRouter(app: App) {
+    // 执行路由守卫函数，将路由传递过去
+    guard(router)
     app.use(router)
 }
 
