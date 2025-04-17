@@ -27,6 +27,9 @@
 import userApi from '@/api/userApi'
 import v from '@/plugins/validate'
 import { store } from '@/utils'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 // 提取出validate包中的几个组件，form表单，字段和错误消息
 const { Form, Field, ErrorMessage } = v
@@ -44,8 +47,10 @@ const onSubmit = async (values: any) => {
     localStorage.setItem("token", token)
     // 使用我们自己写的本地存储工具，来存储token和为其设置过期时间
     store.set("token", {
-        expire: 100, token
+        expire: 100,   // 100秒
+        token,
     })
+    router.push({ name: 'home' })  // 登录成功后，跳转到首页
 }
 </script>
 

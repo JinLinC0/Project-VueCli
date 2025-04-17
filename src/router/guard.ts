@@ -1,3 +1,4 @@
+import { store } from "@/utils";
 import { RouteLocationNormalized, Router } from "vue-router";
 
 class Guard {
@@ -6,15 +7,17 @@ class Guard {
     public run() {
         // 配置路由守卫
         this.router.beforeEach((to, from) => {
+            // 获取本地存储中的token
+            let token = store.get('token')?.token
             // 判断是否登录，如果没有登录，去登录页面
-            if(this.isLogin(to) === false) return { name: 'login' }
+            if(this.isLogin(to, token) === false) return { name: 'login' }
         })
     }
 
     // 判断用户是否登录
-    private isLogin(route: RouteLocationNormalized) {
-        // 返回false，表示用户未认证
-        if(route.name !== 'login') return false
+    private isLogin(route: RouteLocationNormalized, token: any) {
+        // 页面不需要进行验证，或者页面需要进行验证，但是用户已经登录（存在token了）
+        return Boolean(!route.meta.auth || (route.meta.auth && token))
     }
 }
 

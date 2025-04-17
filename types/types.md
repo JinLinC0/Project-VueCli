@@ -11,3 +11,4 @@
 - `viteEnv.d.ts`：`.env`配置项类型的声明文件
 - `module.d.ts`：总的配置声明文件
 - `ResponseResult.d.ts`：声明后端返回接口类型的结构
+- `router.ts`：路由元信息提示的帮助文件
