@@ -8,3 +8,8 @@
 .my-error {
     @apply rounded-md bg-red-400 text-white text-xs px-2 mt-2
 }
+
+// 按钮的全局样式
+.my-button {
+    @apply bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 duration-300
+}

@@ -1,5 +1,9 @@
 <template>
-    <div class="bg-red-500 text-white p-10">home</div>
+    <div class="h-screen w-screen bg-gray-700 flex flex-col justify-center items-center">
+        <img src="/images/vuecli.svg" class="w-40 h-40 object-cover rounded-full mb-8" />
+        <router-link :to="{ name: 'admin.user' }" class="my-button">后台管理</router-link>
+        <div class="text-gray-200 text-sm drop-shadow-md mt-3">前端脚手架项目</div>
+    </div>
 </template>
 
 <script setup lang="ts">

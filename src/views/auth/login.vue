@@ -13,7 +13,7 @@
                     <Field name="password" placeholder="请输入密码" type="password" class="my-input" />
                     <ErrorMessage name="password" as="div" class="my-error" />
                 </div>
-                <button class="login-button mt-8">登录</button>
+                <button class="my-button mt-8 w-full">登录</button>
                 <div class="flex gap-2 justify-center mt-5">
                     <a class="text-xs text-gray-700 hover:text-blue-300">找回密码</a>
                     <a class="text-xs text-gray-700 hover:text-blue-300">配套笔记</a>
@@ -61,7 +61,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-button {
-    @apply bg-blue-500 text-white w-full rounded-md py-2 hover:bg-blue-600 duration-300
-}
 </style>
