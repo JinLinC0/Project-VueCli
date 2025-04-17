@@ -47,7 +47,7 @@ const onSubmit = async (values: any) => {
     localStorage.setItem("token", token)
     // 使用我们自己写的本地存储工具，来存储token和为其设置过期时间
     store.set("token", {
-        expire: 100,   // 100秒
+        // expire: 100,   // 100秒
         token,
     })
     router.push({ name: 'home' })  // 登录成功后，跳转到首页
@@ -56,7 +56,8 @@ const onSubmit = async (values: any) => {
 
 <script lang="ts">
 export default {
-    route: { name: 'login' }
+    // 元信息meta，表示这个页面只能是游客进行访问，如果登录了，就不能访问这个页面
+    route: { name: 'login', meta: { guest: true} }   
 }
 </script>
 
