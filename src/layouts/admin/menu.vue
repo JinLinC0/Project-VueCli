@@ -3,7 +3,7 @@
     <div class="menu w-[200px] bg-gray-800 p-4">
         <!-- 菜单顶部图标和描述 -->
         <div class="logo text-gray-300 flex items-center">
-            <i class="fab fa-robot text-gray-300 mr-2 text-[25px]">M</i>
+            <i class="fab fa-robot text-gray-300 mr-2 text-[25px]">J</i>
             <span class="text-gray-300 text-base">前端脚手架项目</span>
         </div>
         <!-- 菜单导航 -->
@@ -11,11 +11,11 @@
             <dl v-for="(menu, index) of menus" :key="index">
                 <dt @click="handle(menu)">
                     <section>
-                        <i :class="menu.icon" class="fas fa-home">1</i>
+                        <el-icon><Menu /></el-icon>
                         <span class="text-md">{{ menu.title }}</span>
                     </section>
                     <section>
-                        <i>1</i>
+                        <el-icon><ArrowDown /></el-icon>
                     </section>
                 </dt>
                 <dd v-show="menu.activate" :class="{ activate: cmenu.activate }" v-for="(cmenu, key) of menu.children"
@@ -33,7 +33,6 @@ import { ref } from 'vue';
 // 定义菜单类型和数据
 interface IMenuItem {
     title: string,  // 菜单名称
-    icon?: string,  // 菜单图标
     activate?: boolean,  // 是否选中
 }
 interface IMenu extends IMenuItem {
@@ -42,7 +41,7 @@ interface IMenu extends IMenuItem {
 const menus = ref<IMenu[]>(
     [
         {
-            title: '错误页面', icon: 'fas fa-home', activate: true,
+            title: '错误页面', activate: true,
             children: [
                 { title: '404错误', activate: true },
                 { title: '403错误' },
@@ -50,7 +49,7 @@ const menus = ref<IMenu[]>(
             ]
         },
         {
-            title: '代码编辑器', icon: 'fas fa-home',
+            title: '代码编辑器',
             children: [
                 { title: 'Markdown' },
                 { title: '富文本' }
