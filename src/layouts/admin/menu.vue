@@ -15,7 +15,7 @@
                         <span class="text-md">{{ menu.title }}</span>
                     </section>
                     <section>
-                        <el-icon><ArrowDown /></el-icon>
+                        <el-icon class="duration-300" :class="{ 'rotate-180': menu.activate }"><ArrowDown /></el-icon>
                     </section>
                 </dt>
                 <dd v-show="menu.activate" :class="{ activate: cmenu.activate }" v-for="(cmenu, key) of menu.children"
@@ -93,7 +93,7 @@ const handle = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
             }
 
             dd {
-                @apply py-3 pl-4 my-2 text-white rounded-md cursor-pointer duration-300 hover:bg-violet-500;
+                @apply py-3 pl-4 my-2 text-white rounded-md cursor-pointer duration-300 hover:bg-violet-500 bg-gray-700;
 
                 &.activate {
                     @apply bg-violet-700;

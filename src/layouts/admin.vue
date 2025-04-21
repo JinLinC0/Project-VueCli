@@ -1,14 +1,14 @@
 <template>
-    <div class="admin h-screen w-screen flex">
-        <!-- 左侧菜单栏 -->
-        <MenuComponet />
+    <div class="admin h-min-screen w-screen flex">
+        <!-- 左侧菜单栏，菜单默认隐藏，在平板模式的情况下进行显示 -->
+        <MenuComponet class="hidden md:block" />
         <!-- 右侧主要内容 -->
         <div class="content flex-1 bg-gray-100">
             <!-- 顶部导航栏 -->
             <NavbarComponet />
             <!-- 历史记录链接栏 -->
             <HistoryLinkComponet />
-            <div class="m-3 p-5 bg-white">
+            <div class="m-5">
                 <router-view />
             </div>
         </div>
