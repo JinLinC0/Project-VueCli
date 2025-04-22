@@ -1,5 +1,5 @@
 <template>
-    <div class="admin h-min-screen w-screen flex">
+    <div class="admin min-h-screen w-screen flex">
         <!-- 左侧菜单栏，菜单默认隐藏，在平板模式的情况下进行显示 -->
         <MenuComponet class="hidden md:block" />
         <!-- 右侧主要内容 -->

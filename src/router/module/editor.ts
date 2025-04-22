@@ -3,8 +3,8 @@ import { RouteRecordRaw } from 'vue-router';
 export default {
     name: 'editor',
     path: '/editor',
-    component: () => import('@/layouts/editor.vue'),
-    meta: { show: true, title: '编辑器', icon: 'Menu'},
+    component: () => import('@/layouts/admin.vue'),
+    meta: { show: true, title: '编辑器', icon: 'Menu', auth: true },
     children: [
         {
             name: 'base',

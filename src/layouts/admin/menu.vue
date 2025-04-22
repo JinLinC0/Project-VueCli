@@ -35,10 +35,13 @@
 
 <script setup lang="ts">
 import { router } from '@/store/router';
-import { RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
+import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router';
 
 // 直接获取状态中的值
 const routerStore = router();
+
+// 定义路由服务
+const routerService = useRouter();
 
 // 重置菜单的方法（将所有子菜单都进行折叠）
 const resetMenus = () => {
@@ -59,6 +62,8 @@ const handle = (pRoute: RouteRecordNormalized, cRoute?: RouteRecordRaw) => {
     pRoute.meta.isClick = true;
     if (cRoute && cRoute.meta) {
         cRoute.meta.isClick = true;
+        // 点击子菜单后，进行路由的跳转
+        routerService.push(cRoute);
     }
 }
 </script>
