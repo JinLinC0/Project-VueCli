@@ -11,3 +11,5 @@
 - `validate`: validate插件文件夹，用于封装validate相关的表单验证规则
   - `index.ts`: validate插件的入口配置文件
   - `yup.ts`: 提供yup验证规则的封装文件
+- `pinia`: pinia插件文件夹，用于封装pinia相关的配置
+  - `index.ts`: pinia插件的入口配置文件

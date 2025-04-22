@@ -2,6 +2,7 @@ import { App, defineAsyncComponent } from "vue";
 import { setupTailwindcss } from "./tailwindcss";
 import _ from 'lodash'
 import setupElementPlus from "./elementPlus";
+import setupPinia from "./pinia";
 
 /***
  * @description 设置插件的方法
@@ -11,6 +12,7 @@ export function setupPlugins(app: App) {
     setupTailwindcss()
     autoRegisterComponent(app)
     setupElementPlus(app)
+    setupPinia(app)
 }
 
 // 自动注册全局组件

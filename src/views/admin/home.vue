@@ -5,7 +5,7 @@
             <template #header>
                 <div class="flex justify-between items-center">
                     <span>{{ card.title }}</span>
-                    <el-tag type="danger" size="mini" effect="dark">月</el-tag>
+                    <el-tag type="danger" size="small" effect="dark">月</el-tag>
                 </div>
             </template>
             <section class="flex mt-3 justify-between items-center">

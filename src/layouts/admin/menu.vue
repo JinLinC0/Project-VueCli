@@ -3,24 +3,30 @@
     <div class="menu w-[200px] bg-gray-800 p-4">
         <!-- 菜单顶部图标和描述 -->
         <div class="logo text-gray-300 flex items-center">
-            <i class="fab fa-robot text-gray-300 mr-2 text-[25px]">J</i>
+            <el-icon class="text-gray-300 mr-2">
+                <GoldMedal />
+            </el-icon>
             <span class="text-gray-300 text-base">前端脚手架项目</span>
         </div>
         <!-- 菜单导航 -->
         <div class="left-container">
-            <dl v-for="(menu, index) of menus" :key="index">
-                <dt @click="handle(menu)">
+            <dl v-for="(route, index) of routerStore.routes" :key="index">
+                <dt @click="handle(route)">
                     <section>
-                        <el-icon><Menu /></el-icon>
-                        <span class="text-md">{{ menu.title }}</span>
+                        <el-icon class="text-gray-300 mr-2">
+                            <component :is="route.meta.icon" />
+                        </el-icon>
+                        <span class="text-md">{{ route.meta.title }}</span>
                     </section>
                     <section>
-                        <el-icon class="duration-300" :class="{ 'rotate-180': menu.activate }"><ArrowDown /></el-icon>
+                        <el-icon class="duration-300" :class="{ 'rotate-180': route.meta.isClick }">
+                            <ArrowDown />
+                        </el-icon>
                     </section>
                 </dt>
-                <dd v-show="menu.activate" :class="{ activate: cmenu.activate }" v-for="(cmenu, key) of menu.children"
-                    :key="key">
-                    <span>{{ cmenu.title }}</span>
+                <dd v-show="route.meta.isClick" :class="{ activate: childRoute.meta?.isClick }"
+                    v-for="(childRoute, key) of route.children" :key="key" @click="handle(route, childRoute)">
+                    <span>{{ childRoute.meta?.title }}</span>
                 </dd>
             </dl>
         </div>
@@ -28,49 +34,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { router } from '@/store/router';
+import { RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
 
-// 定义菜单类型和数据
-interface IMenuItem {
-    title: string,  // 菜单名称
-    activate?: boolean,  // 是否选中
-}
-interface IMenu extends IMenuItem {
-    children?: IMenuItem[]
-}
-const menus = ref<IMenu[]>(
-    [
-        {
-            title: '错误页面', activate: true,
-            children: [
-                { title: '404错误', activate: true },
-                { title: '403错误' },
-                { title: '500错误' }
-            ]
-        },
-        {
-            title: '代码编辑器',
-            children: [
-                { title: 'Markdown' },
-                { title: '富文本' }
-            ]
-        },
-    ])
+// 直接获取状态中的值
+const routerStore = router();
 
 // 重置菜单的方法（将所有子菜单都进行折叠）
 const resetMenus = () => {
-    menus.value.forEach(pmenu => {
-        pmenu.activate = false;
-        pmenu.children?.forEach(cmenu => {
-            cmenu.activate = false
+    routerStore.routes.forEach(route => {
+        route.meta.isClick = false;   // 将父菜单的激活状态设置为false
+        // 遍历子菜单，将子菜单路由的激活状态设置为false
+        route.children?.forEach(route => {
+            if (route.meta) {
+                route.meta.isClick = false
+            }
         })
     })
 }
 
-// 菜单的处理事件
-const handle = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
+// 菜单的处理事件，子路由的传递是可选的
+const handle = (pRoute: RouteRecordNormalized, cRoute?: RouteRecordRaw) => {
     resetMenus();
-    pmenu.activate = !pmenu.activate
+    pRoute.meta.isClick = true;
+    if (cRoute && cRoute.meta) {
+        cRoute.meta.isClick = true;
+    }
 }
 </script>
 
@@ -85,10 +74,6 @@ const handle = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
 
                 section {
                     @apply flex items-center;
-
-                    i {
-                        @apply mr-2 text-sm;
-                    }
                 }
             }
 
