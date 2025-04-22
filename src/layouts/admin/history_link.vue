@@ -1,8 +1,8 @@
 <template>
-    <div class="hidden md:block">
-        <div class="m-5 grid grid-flow-col gap-2 justify-start">
-            <a v-for="link of links" class="bg-white rounded-s-md py-2 px-3 flex items-center justify-center">
-                <span class="text-sm text-gray-600">{{ link.title }}</span>
+    <div class="hidden md:block bg-gray-50 p-3 border-t border-b shadow-sm">
+        <div class="grid grid-flow-col gap-3 justify-start">
+            <a v-for="link of links" class="text-sm bg-white border hover:bg-blue-300 hover:text-white duration-300 rounded-sm shadow-sm py-2 px-3 flex items-center justify-center cursor-pointer">
+                {{ link.title }}
                 <el-icon class="ml-1">
                     <Close />
                 </el-icon>
