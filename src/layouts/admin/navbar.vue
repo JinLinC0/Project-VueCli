@@ -8,8 +8,8 @@
 
         <!-- 右侧导航栏面包屑 -->
         <div class="flex justify-center items-center relative group cursor-pointer">
-            <img src="/images/vuecli.svg" class="w-8 h-8 rounded-full object-cover">
-            <span class="ml-2 text-sm text-gray-600">当前用户</span>
+            <img :src="userStore.info?.avatar" class="w-8 h-8 rounded-full object-cover">
+            <span class="ml-2 text-sm text-gray-600">{{ userStore.info?.name }}</span>
             <section class="group-hover:block absolute top-full bg-white shadow-sm p-3 whitespace-nowrap border rounded-md hidden">
                 <div class="flex items-center cursor-pointer border-b py-3">
                     <a>*</a>
@@ -29,7 +29,10 @@
 </template>
 
 <script setup lang="ts">
+import user from '@/store/user';
 
+// 从全局状态中读取用户数据，在标签中可以直接使用全局状态中的数据
+const userStore = user();  // 全局状态相当于响应式的数据
 </script>
 
 <style scoped></style>

@@ -5,7 +5,7 @@ import { MockMethod } from "vite-plugin-mock";
 // 一个简单的测试案例
 export default [
     {
-        url: '/api/info',
+        url: '/api/user/info',
         method: 'get',
         response: () => {
             return {
@@ -13,9 +13,9 @@ export default [
                 message: '请求成功',
                 type: 'success',
                 data: {
-                    name: "jlc",
+                    name: "当前用户: jlc",
                     age: 24,
-                    avatar: "https://img2.baidu.com/it/u=3245138663,4138288476&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+                    avatar: "/images/vuecli.svg"
                 }
             }
         }

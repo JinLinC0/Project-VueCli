@@ -15,7 +15,7 @@ class userApi {
     info() {
         // 为了有更好的类型声明，调用的时候传递类型声明的User类型
         return http.request<User>({
-            url: "info",
+            url: "user/info",
         })
     }
     login(data: any) {

@@ -1,24 +1,35 @@
+import user from "@/store/user";
 import { store } from "@/utils";
 import { RouteLocationNormalized, Router } from "vue-router";
 
 class Guard {
     // 通过构造函数接收传递过来的router
-    constructor(private router: Router) {}
+    constructor(private router: Router) { }
     public run() {
         // 调用路由守卫
         this.router.beforeEach(this.beforeEach.bind(this))
     }
 
     // 定义路由守卫
-    private beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+    private async beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
         // 判断是否登录，如果没有登录，去登录页面
-        if(this.isLogin(to) === false) return { name: 'login' }
+        if (this.isLogin(to) === false) return { name: 'login' }
         // 如果判断为假，验证不通过，从哪里来回哪里去（对于登录后的用户，存在本地token，按理来说是不能访问登录页面的）
-        if(this.isGuest(to) === false) return from
+        if (this.isGuest(to) === false) return from
+        // 获取用户资料
+        await this.getUserInfo()
+    }
+
+    // 获取用户资料
+    private getUserInfo() {
+        // 调用全局状态中的用户信息，前提是token存在
+        if (this.token()) {
+            return user().getUserInfo()
+        }
     }
 
     // 将获取token的方法封装成一个函数，其返回值是字符串或者null
-    private token(): string | null{
+    private token(): string | null {
         return store.get('token')?.token
     }
 
