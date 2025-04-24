@@ -14,6 +14,12 @@ const routes = [
         name: "login",
         component: () => import("@/views/auth/login.vue"),
         meta: { guest: true }   // 游客才能访问，登录后就不能进行访问
+    },
+    {
+        // 404页面路由
+        path: "/:any(.*)",
+        name: "notFound",
+        component: () => import("@/views/errors/404.vue"),
     }
 ] as RouteRecordRaw[]   // 声明类型，用于存放路由的数组
 

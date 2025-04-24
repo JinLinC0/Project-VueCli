@@ -1,5 +1,6 @@
-import user from "@/store/user";
-import { store } from "@/utils";
+import { CacheEnum } from "@/enum/cacheEnum";
+import userStore from "@/store/userStore";
+import utils from "@/utils";
 import { RouteLocationNormalized, Router } from "vue-router";
 
 class Guard {
@@ -24,19 +25,23 @@ class Guard {
     private getUserInfo() {
         // 调用全局状态中的用户信息，前提是token存在
         if (this.token()) {
-            return user().getUserInfo()
+            return userStore().getUserInfo()
         }
     }
 
     // 将获取token的方法封装成一个函数，其返回值是字符串或者null
     private token(): string | null {
-        return store.get('token')?.token
+        return utils.store.get(CacheEnum.TOKEN_NAME)
     }
 
     // 判断用户是否登录   登录用户访问
     private isLogin(route: RouteLocationNormalized) {
         // 页面不需要进行验证，或者页面需要进行验证，但是用户已经登录（存在token了）
-        return Boolean(!route.meta.auth || (route.meta.auth && this.token()))
+        const state = Boolean(!route.meta.auth || (route.meta.auth && this.token()))
+        if (state === false) {
+            utils.store.set(CacheEnum.REDIRECT_ROUTE_NAME, route.name); // 存储当前路由，用于登录后跳转回当前的路由
+        }
+        return state
     }
 
     // 判断用户是否为游客   游客访问

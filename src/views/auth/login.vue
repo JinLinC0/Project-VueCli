@@ -24,12 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import userApi from '@/api/userApi'
 import v from '@/plugins/validate'
-import { store } from '@/utils'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import utils from '@/utils'
 
 // 提取出validate包中的几个组件，form表单，字段和错误消息
 const { Form, Field, ErrorMessage } = v
@@ -42,15 +38,7 @@ const schema = v.yup.object({
 
 // 表单提交
 const onSubmit = async (values: any) => {
-    const { data: { token } } = await userApi.login(values)
-    // 将token存储到本地
-    localStorage.setItem("token", token)
-    // 使用我们自己写的本地存储工具，来存储token和为其设置过期时间
-    store.set("token", {
-        // expire: 100,   // 100秒
-        token,
-    })
-    router.push({ name: 'home' })  // 登录成功后，跳转到首页
+    utils.user.login(values)
 }
 </script>
 

@@ -10,6 +10,12 @@ interface LoginInterface {
     token: string
 }
 
+// 提交登录注册表单的类型
+export interface ILoginData {
+    username: string,
+    password: string
+}
+
 // 将接口封装成类，用户接口类，存放一些用户相关的接口
 class userApi {
     info() {
@@ -18,7 +24,7 @@ class userApi {
             url: "user/info",
         })
     }
-    login(data: any) {
+    login(data: ILoginData) {
         return http.request<LoginInterface>({
             url: "login",
             method: "post",
