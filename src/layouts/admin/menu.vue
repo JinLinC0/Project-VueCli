@@ -10,23 +10,23 @@
         </div>
         <!-- 菜单导航 -->
         <div class="left-container">
-            <dl v-for="(route, index) of routerStore.routes" :key="index">
-                <dt @click="handle(route)">
+            <dl v-for="(menu, index) of menu.menus" :key="index">
+                <dt @click="handle(menu)">
                     <section>
                         <el-icon class="text-gray-300 mr-2">
-                            <component :is="route.meta.icon" />
+                            <component :is="menu.icon" />
                         </el-icon>
-                        <span class="text-md">{{ route.meta.title }}</span>
+                        <span class="text-md">{{ menu.title }}</span>
                     </section>
                     <section>
-                        <el-icon class="duration-300" :class="{ 'rotate-180': route.meta.isClick }">
+                        <el-icon class="duration-300" :class="{ 'rotate-180': menu.isClick }">
                             <ArrowDown />
                         </el-icon>
                     </section>
                 </dt>
-                <dd v-show="route.meta.isClick" :class="{ activate: childRoute.meta?.isClick }"
-                    v-for="(childRoute, key) of route.children" :key="key" @click="handle(route, childRoute)">
-                    <span>{{ childRoute.meta?.title }}</span>
+                <dd v-show="menu.isClick" :class="{ activate: cmenu?.isClick }"
+                    v-for="(cmenu, key) of menu.children" :key="key" @click="handle(menu, cmenu)">
+                    <span>{{ cmenu?.title }}</span>
                 </dd>
             </dl>
         </div>
@@ -34,36 +34,32 @@
 </template>
 
 <script setup lang="ts">
-import { router } from '@/store/router';
-import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router';
+import { IMenu } from '#/menu';
+import router from '@/router';
+import menuStore from '@/store/menuStore';
 
-// 直接获取状态中的值
-const routerStore = router();
-
-// 定义路由服务
-const routerService = useRouter();
+// 从全局状态中获取菜单内容
+const menu = menuStore();
 
 // 重置菜单的方法（将所有子菜单都进行折叠）
 const resetMenus = () => {
-    routerStore.routes.forEach(route => {
-        route.meta.isClick = false;   // 将父菜单的激活状态设置为false
+    menu.menus.forEach(menu => {
+        menu.isClick = false;   // 将父菜单的激活状态设置为false
         // 遍历子菜单，将子菜单路由的激活状态设置为false
-        route.children?.forEach(route => {
-            if (route.meta) {
-                route.meta.isClick = false
-            }
+        menu.children?.forEach(cmenu => {
+            cmenu.isClick = false
         })
     })
 }
 
 // 菜单的处理事件，子路由的传递是可选的
-const handle = (pRoute: RouteRecordNormalized, cRoute?: RouteRecordRaw) => {
+const handle = (pmenu: IMenu, cmenu?: IMenu) => {
     resetMenus();
-    pRoute.meta.isClick = true;
-    if (cRoute && cRoute.meta) {
-        cRoute.meta.isClick = true;
+    pmenu.isClick = true;
+    if (cmenu) {
+        cmenu.isClick = true;
         // 点击子菜单后，进行路由的跳转
-        routerService.push(cRoute);
+        router.push({ name: cmenu.route });
     }
 }
 </script>
