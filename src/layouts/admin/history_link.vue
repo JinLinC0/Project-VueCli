@@ -1,27 +1,25 @@
 <template>
-    <div class="hidden md:block bg-gray-50 p-3 border-t border-b shadow-sm">
+    <div class="hidden md:block bg-gray-50 p-3 border-t border-b shadow-sm" v-show="links.historyMenus.length">
         <div class="grid grid-flow-col gap-3 justify-start">
-            <a v-for="link of links" class="text-sm bg-white border hover:bg-blue-300 hover:text-white duration-300 rounded-sm shadow-sm py-2 px-3 flex items-center justify-center cursor-pointer">
-                {{ link.title }}
-                <el-icon class="ml-1">
+            <div v-for="link of links.historyMenus"
+                class="text-sm bg-white border hover:bg-blue-300 hover:text-white duration-300 rounded-sm shadow-sm py-2 px-3 flex items-center justify-center cursor-pointer"
+                :class="{ 'bg-blue-300 text-white': $route.name === link.route }">
+                <router-link :to="{ name: link.route }">
+                    {{ link.title }}
+                </router-link>
+                <el-icon class="ml-1" @click="links.removeHistoryMenu(link)">
                     <Close />
                 </el-icon>
-            </a>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import menuStore from '@/store/menuStore';
 
-const links = ref<{ title: string }[]>([
-    { title: '编辑器' },
-    { title: '图表' },
-    { title: '按钮' },
-    { title: '文本块' },
-    { title: '提示信息' },
-    { title: '菜单' },
-])
+// 从全局状态中读取历史菜单内容
+const links = menuStore()
 </script>
 
 <style scoped></style>

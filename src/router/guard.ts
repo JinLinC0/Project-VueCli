@@ -1,4 +1,5 @@
 import { CacheEnum } from "@/enum/cacheEnum";
+import menuStore from "@/store/menuStore";
 import userStore from "@/store/userStore";
 import utils from "@/utils";
 import { RouteLocationNormalized, Router } from "vue-router";
@@ -19,6 +20,9 @@ class Guard {
         if (this.isGuest(to) === false) return from
         // 获取用户资料
         await this.getUserInfo()
+
+        // 记录历史路由
+        menuStore().addHistoryMenu(to)
     }
 
     // 获取用户资料
