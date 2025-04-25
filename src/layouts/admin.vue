@@ -9,7 +9,12 @@
             <!-- 历史记录链接栏 -->
             <HistoryLinkComponet />
             <div class="m-5">
-                <router-view />
+                <router-view #default="{ Component }">
+                    <!-- 添加跳转的过渡动画 -->
+                    <Transition enter-active-class="animate__animated animate__fadeIn" >
+                        <component :is="Component" />
+                    </Transition>
+                </router-view>
             </div>
         </div>
     </div>

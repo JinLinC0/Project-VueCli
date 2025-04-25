@@ -16,7 +16,7 @@ export default {
             name: 'markdown',
             path: 'markdown',
             component: () => import('@/views/editor/markdown.vue'),
-            meta: { meun: { title: 'markdown编辑器' } },
+            meta: { menu: { title: 'markdown编辑器' } },
         }
     ]
 } as RouteRecordRaw
