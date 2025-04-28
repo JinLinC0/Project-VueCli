@@ -25,9 +25,7 @@ import menuStore from '@/store/menuStore';
 import HistoryLinkComponet from './admin/history_link.vue';
 import MenuComponet from './admin/menu.vue'
 import NavbarComponet from './admin/navbar.vue'
-import { useRouter } from 'vue-router';
 
-const route = useRouter()
 const menu = menuStore()
 menu.init()  // 初始化菜单的内容
 
