@@ -15,7 +15,8 @@ export default [
                 data: {
                     name: "当前用户: jlc",
                     age: 24,
-                    avatar: "/images/vuecli.svg"
+                    avatar: "/images/vuecli.svg",
+                    permissions: ['editor_markdown', 'editor']   // 用户权限
                 }
             }
         }

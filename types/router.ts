@@ -6,8 +6,8 @@ declare module 'vue-router' {
         // 用户相关
         auth?: boolean   // 是否需要登录
         guest?: boolean   // 是否是游客（未登录）访问
-        permissions?: string[]  // 访问权限
     
-        menu?: IMenu 
+        menu?: IMenu
+        permission?: string  // 不同模块的访问权限
     }
 }

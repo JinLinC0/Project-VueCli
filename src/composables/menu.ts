@@ -3,7 +3,7 @@ import { CacheEnum } from "@/enum/cacheEnum";
 import router from "@/router";
 import utils from "@/utils";
 import { ref } from "vue";
-import { RouteLocationNormalized, RouteLocationNormalizedLoaded } from "vue-router";
+import { RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw } from "vue-router";
 
 class Menu {
     public menus = ref<IMenu[]>([])
@@ -14,7 +14,7 @@ class Menu {
     constructor() { }
     init() {
         this.menus.value = this.getMenusByRoute()
-        this.history.value = utils.store.get(CacheEnum.HISTORY_MENU) ?? []
+        this.history.value = this.getHistoryMenu()
     }
     // 根据路由来获取菜单，获取路由（读取我们所有可用的路由）
     getMenusByRoute() {
@@ -28,6 +28,16 @@ class Menu {
                 }) as IMenu[]
                 return menu
             }).filter(menu => menu.children?.length) as IMenu[];    // 当子菜单路由为空时，父级路由也过滤掉，不在菜单中显示
+    }
+    // 获取历史菜单
+    private getHistoryMenu() {
+        // 获取历史菜单之前，先进行权限的过滤（将本地存储的不符合权限的路由过滤掉）
+        const routes = [] as RouteRecordRaw[]
+        router.getRoutes().map(r => routes.push(...r.children))
+        let menus: IMenu[] = utils.store.get(CacheEnum.HISTORY_MENU) ?? []
+        return menus.filter(m => {
+            return routes.some(r => r.name === m.route)
+        })
     }
     // 添加历史菜单
     addHistoryMenu(route: RouteLocationNormalized) {
@@ -50,6 +60,7 @@ class Menu {
     removeHistoryMenu(menu: IMenu) {
         const index = this.history.value.indexOf(menu)
         this.history.value.splice(index, 1)
+        utils.store.set(CacheEnum.HISTORY_MENU, this.history.value)
     }
     // 设置当前菜单的显示和隐藏状态
     setCurrentMenu(route: RouteLocationNormalizedLoaded) {
