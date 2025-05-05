@@ -3,10 +3,12 @@ import { CacheEnum } from "@/enum/cacheEnum";
 import router from "@/router";
 import utils from "@/utils";
 import { ref } from "vue";
+import { RouteLocationNormalizedLoaded } from "vue-router";
 
 class Menu {
     public menus = ref<IMenu[]>([])
     public history = ref<IMenu[]>([])
+    public close = ref(false)  // 左侧菜单的展开和折叠状态，默认是展开的
     constructor() {}
     init() {
         this.menus.value = this.getMenusByRoute()
@@ -24,6 +26,33 @@ class Menu {
                 }) as IMenu[]
                 return menu
             }).filter(menu => menu.children?.length) as IMenu[];    // 当子菜单路由为空时，父级路由也过滤掉，不在菜单中显示
+    }
+    // 设置当前菜单的显示和隐藏状态
+    setCurrentMenu(route: RouteLocationNormalizedLoaded) {
+        this.menus.value.forEach(m => {
+            m.isClick = false  // 默认菜单的点击动作设为false
+            // 遍历菜单的子菜单
+            m.children?.forEach(c => {
+                c.isClick = false  // 默认子菜单的点击动作设为false
+                // 如果当前路由与子菜单的route属性相等，则设置点击动作为true
+                if(c.route === route.name) {
+                    // 设置当前菜单的点击状态为true
+                    m.isClick = true
+                    c.isClick = true
+                }
+            })
+        })
+    }
+    // 左侧主菜单的展开和折叠控制
+    toggleCollapse() {
+        this.close.value = !this.close.value
+    }
+    // 左侧主菜单的切换控制，父级菜单一个展示一个折叠
+    toggleParentMenu(menu: IMenu) {
+        this.menus.value.forEach(m => {
+            m.isClick = false
+            if(m === menu) m.isClick = true
+        })
     }
 }
 
