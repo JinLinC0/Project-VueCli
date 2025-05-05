@@ -3,13 +3,13 @@ import { CacheEnum } from "@/enum/cacheEnum";
 import router from "@/router";
 import utils from "@/utils";
 import { ref } from "vue";
-import { RouteLocationNormalizedLoaded } from "vue-router";
+import { RouteLocationNormalized, RouteLocationNormalizedLoaded } from "vue-router";
 
 class Menu {
     public menus = ref<IMenu[]>([])
     public history = ref<IMenu[]>([])
     public close = ref(false)  // 左侧菜单的展开和折叠状态，默认是展开的
-    constructor() {}
+    constructor() { }
     init() {
         this.menus.value = this.getMenusByRoute()
         this.history.value = utils.store.get(CacheEnum.HISTORY_MENU) ?? []
@@ -27,6 +27,27 @@ class Menu {
                 return menu
             }).filter(menu => menu.children?.length) as IMenu[];    // 当子菜单路由为空时，父级路由也过滤掉，不在菜单中显示
     }
+    // 添加历史菜单
+    addHistoryMenu(route: RouteLocationNormalized) {
+        if (!route.meta?.menu) return  // 如果该路由没有菜单信息，则不进行添加
+        const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
+        // 判断历史菜单中该路由是否存在，如果存在则不压入数组
+        const isHas = this.history.value.some(menu => menu.route === route.name)
+        if (!isHas) {
+            this.history.value.unshift(menu)   // 往前面进行追加
+        }
+        // 如果历史菜单数量超过10个，则删除最后一个
+        if (this.history.value.length > 10) {
+            this.history.value.pop()
+        }
+        // 将历史菜单进行存储，防止浏览器刷新时丢失
+        utils.store.set(CacheEnum.HISTORY_MENU, this.history.value)
+    }
+    // 删除历史菜单
+    removeHistoryMenu(menu: IMenu) {
+        const index = this.history.value.indexOf(menu)
+        this.history.value.splice(index, 1)
+    }
     // 设置当前菜单的显示和隐藏状态
     setCurrentMenu(route: RouteLocationNormalizedLoaded) {
         this.menus.value.forEach(m => {
@@ -35,7 +56,7 @@ class Menu {
             m.children?.forEach(c => {
                 c.isClick = false  // 默认子菜单的点击动作设为false
                 // 如果当前路由与子菜单的route属性相等，则设置点击动作为true
-                if(c.route === route.name) {
+                if (c.route === route.name) {
                     // 设置当前菜单的点击状态为true
                     m.isClick = true
                     c.isClick = true
@@ -51,7 +72,7 @@ class Menu {
     toggleParentMenu(menu: IMenu) {
         this.menus.value.forEach(m => {
             m.isClick = false
-            if(m === menu) m.isClick = true
+            if (m === menu) m.isClick = true
         })
     }
 }
