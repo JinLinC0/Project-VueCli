@@ -21,6 +21,9 @@
         <div class="flex justify-center items-center relative group cursor-pointer">
             <img :src="user.info?.avatar" class="w-8 h-8 rounded-full object-cover">
             <span class="ml-2 text-sm text-gray-600">{{ user.info?.name }}</span>
+            <div class="ml-2 cursor-pointer flex justify-center" @click="fullscreen">
+                <el-icon><FullScreen /></el-icon>
+            </div>
             <section
                 class="group-hover:block absolute top-full bg-white shadow-sm p-3 whitespace-nowrap border rounded-md hidden">
                 <div class="flex items-center cursor-pointer border-b py-3">
@@ -59,6 +62,17 @@ import menuStore from '@/composables/menu';
 
 // 从全局状态中读取用户数据，在标签中可以直接使用全局状态中的数据
 const user = userStore();  // 全局状态相当于响应式的数据
+
+// 页面全屏方法
+const fullscreen = () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
 </script>
 
 <style scoped></style>
