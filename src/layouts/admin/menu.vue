@@ -8,9 +8,31 @@
             </el-icon>
             <span class="text-gray-300 text-base">前端脚手架项目</span>
         </div>
-        <!-- 菜单导航 -->
-        <div class="left-container">
+        <!-- 菜单导航，通过方式一获取数据 -->
+        <!-- <div class="left-container">
             <dl v-for="(menu, index) of menu.menus" :key="index">
+                <dt @click="handle(menu)">
+                    <section>
+                        <el-icon class="text-gray-300 mr-2">
+                            <component :is="menu.icon" />
+                        </el-icon>
+                        <span class="text-md">{{ menu.title }}</span>
+                    </section>
+                    <section>
+                        <el-icon class="duration-300" :class="{ 'rotate-180': menu.isClick }">
+                            <ArrowDown />
+                        </el-icon>
+                    </section>
+                </dt>
+                <dd v-show="menu.isClick" :class="{ activate: cmenu?.isClick }"
+                    v-for="(cmenu, key) of menu.children" :key="key" @click="handle(menu, cmenu)">
+                    <span>{{ cmenu?.title }}</span>
+                </dd>
+            </dl>
+        </div> -->
+        <!-- 菜单导航，通过方式二获取数据 -->
+        <div class="left-container">
+            <dl v-for="(menu, index) of menuStore.menus.value" :key="index">
                 <dt @click="handle(menu)">
                     <section>
                         <el-icon class="text-gray-300 mr-2">
@@ -36,14 +58,38 @@
 <script setup lang="ts">
 import { IMenu } from '#/menu';
 import router from '@/router';
-import menuStore from '@/store/menuStore';
+// // 方式一：从Pinia全局状态中获取菜单内容
+// import menuStore from '@/store/menuStore';
+// const menu = menuStore();
 
-// 从全局状态中获取菜单内容
-const menu = menuStore();
+// // 重置菜单的方法（将所有子菜单都进行折叠）
+// const resetMenus = () => {
+//     menu.menus.forEach(menu => {
+//         menu.isClick = false;   // 将父菜单的激活状态设置为false
+//         // 遍历子菜单，将子菜单路由的激活状态设置为false
+//         menu.children?.forEach(cmenu => {
+//             cmenu.isClick = false
+//         })
+//     })
+// }
 
+// // 菜单的处理事件，子路由的传递是可选的
+// const handle = (pmenu: IMenu, cmenu?: IMenu) => {
+//     resetMenus();
+//     pmenu.isClick = true;
+//     if (cmenu) {
+//         cmenu.isClick = true;
+//         // 点击子菜单后，进行路由的跳转
+//         router.push({ name: cmenu.route });
+//     }
+// }
+
+// 方式二：从全局的响应式对象中读取历史菜单内容
+import menuStore from '@/composables/menu';
+menuStore.init()
 // 重置菜单的方法（将所有子菜单都进行折叠）
 const resetMenus = () => {
-    menu.menus.forEach(menu => {
+    menuStore.menus.value.forEach(menu => {
         menu.isClick = false;   // 将父菜单的激活状态设置为false
         // 遍历子菜单，将子菜单路由的激活状态设置为false
         menu.children?.forEach(cmenu => {

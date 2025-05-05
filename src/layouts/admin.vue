@@ -1,18 +1,22 @@
 <template>
-    <div class="admin min-h-screen w-screen flex">
+    <div class="admin h-screen w-screen grid grid-cols-[auto_1fr]"> <!-- 表示布局分为两列，一个是自动，一个是占据剩余空间 -->
         <!-- 左侧菜单栏，菜单默认隐藏，在平板模式的情况下进行显示 -->
         <MenuComponet class="hidden md:block" />
         <!-- 右侧主要内容 -->
-        <div class="content flex-1 bg-gray-100">
-            <!-- 顶部导航栏 -->
-            <NavbarComponet />
-            <!-- 历史记录链接栏 -->
-            <HistoryLinkComponet />
-            <div class="m-5">
+        <div class="content bg-gray-100 grid grid-rows-[auto_1fr]"> <!-- 表示布局分为两行，一个是自动，一个是占据剩余空间 -->
+            <div>
+                <!-- 顶部导航栏 -->
+                <NavbarComponet />
+                <!-- 历史记录链接栏 -->
+                <HistoryLinkComponet />
+            </div>
+            <div class="p-3 relative overflow-y-auto">
                 <router-view #default="{ Component }">
                     <!-- 添加跳转的过渡动画 -->
-                    <Transition enter-active-class="animate__animated animate__fadeIn" >
-                        <component :is="Component" />
+                    <Transition appear class="animate__animated" 
+                        enter-active-class="animate__fadeIn"
+                        leave-active-class="animate__fadeOut">
+                        <component :is="Component" class="absolute w-full" />
                     </Transition>
                 </router-view>
             </div>
@@ -38,4 +42,12 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.animate__fadeIn {
+    animation-duration: 0.5s;
+}
+
+.animate__fadeOut {
+    animation-duration: 0.5s;
+}
+</style>
