@@ -25,13 +25,20 @@
 </template>
 
 <script setup lang="ts">
-import menuStore from '@/store/menuStore';
+// import menuStore from '@/store/menuStore';
+import menu from '@/composables/menu';
 import HistoryLinkComponet from './admin/history_link.vue';
 import MenuComponet from './admin/menu.vue'
 import NavbarComponet from './admin/navbar.vue'
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
 
-const menu = menuStore()
+const route = useRoute()
+
 menu.init()  // 初始化菜单的内容
+watch(route, () => {
+    menu.addHistoryMenu(route)
+}, { immediate: true })
 
 </script>
 

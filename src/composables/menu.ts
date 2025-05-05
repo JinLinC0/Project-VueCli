@@ -9,6 +9,8 @@ class Menu {
     public menus = ref<IMenu[]>([])
     public history = ref<IMenu[]>([])
     public close = ref(false)  // 左侧菜单的展开和折叠状态，默认是展开的
+    public route = ref(null as null | RouteLocationNormalized)   // 用于面包屑组件的路由路径
+
     constructor() { }
     init() {
         this.menus.value = this.getMenusByRoute()
@@ -30,6 +32,7 @@ class Menu {
     // 添加历史菜单
     addHistoryMenu(route: RouteLocationNormalized) {
         if (!route.meta?.menu) return  // 如果该路由没有菜单信息，则不进行添加
+        this.route.value = route
         const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
         // 判断历史菜单中该路由是否存在，如果存在则不压入数组
         const isHas = this.history.value.some(menu => menu.route === route.name)

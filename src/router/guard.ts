@@ -1,3 +1,4 @@
+import menu from "@/composables/menu";
 import { CacheEnum } from "@/enum/cacheEnum";
 import menuStore from "@/store/menuStore";
 import userStore from "@/store/userStore";
@@ -23,6 +24,7 @@ class Guard {
 
         // 记录历史路由
         menuStore().addHistoryMenu(to)
+        menu.addHistoryMenu(to)
     }
 
     // 获取用户资料
