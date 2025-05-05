@@ -33,17 +33,6 @@
         </div> -->
             <!-- 菜单导航，通过方式二获取数据 -->
             <div class="left-container">
-                <dl>
-                    <dt :class="{ 'bg-violet-600 text-write p-3 rounded-md': $route.name === 'admin.home' }"
-                        @click="router.push({ name: 'admin' })">
-                        <section>
-                            <el-icon>
-                                <HomeFilled />
-                            </el-icon>
-                            <span>回到首页</span>
-                        </section>
-                    </dt>
-                </dl>
                 <dl v-for="(menu, index) of menuStore.menus.value" :key="index">
                     <dt @click="menuStore.toggleParentMenu(menu)">
                         <section>
