@@ -1,4 +1,3 @@
-import { Random } from "mockjs";
 import { MockMethod } from "vite-plugin-mock";
 
 // 模拟后台返回的数据

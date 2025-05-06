@@ -1,0 +1,1 @@
+{"root":["./vite.config.ts","./vite/alias.ts","./vite/util.ts","./vite/plugins/index.ts","./vite/plugins/mock.ts","./types/responseresult.d.ts","./types/module.d.ts","./types/typings.d.ts","./types/viteenv.d.ts"],"version":"5.8.2"}

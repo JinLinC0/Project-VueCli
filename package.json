@@ -19,6 +19,7 @@
     "fontawesome": "^5.6.3",
     "lodash": "^4.17.21",
     "pinia": "^3.0.2",
+    "rollup-plugin-visualizer": "^5.14.0",
     "vee-validate": "^4.15.0",
     "vue": "^3.4.37",
     "vue-router": "^4.5.0",

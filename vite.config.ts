@@ -2,6 +2,7 @@ import { ConfigEnv, loadEnv } from 'vite'
 import alias from './vite/alias'
 import { parseEnv } from './vite/util'
 import { setupPlugins } from './vite/plugins'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 /***
  * @description 相关插件的配置
@@ -27,9 +28,22 @@ export default ({ command, mode }: ConfigEnv) => {
       }
     },
     // plugins: [vue()],
-    plugins: setupPlugins(isBuild, env),
+    plugins: [ ...setupPlugins(isBuild, env), visualizer() ],
     resolve: {
       alias
+    },
+    build: {  // 依赖模块单独打包
+      rollupOptions: {
+        emptyOutDir: true,  // 每次打包将编译目录进行清空
+        output: {
+          manualChunks(id: string) {
+            // 如果id中包含node_modules，则返回node_modules中的模块名（格式化的内容）
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          }
+        }
+      }
     }
   }
 }
