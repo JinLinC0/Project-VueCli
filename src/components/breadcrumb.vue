@@ -13,7 +13,6 @@
 <script setup lang="ts">
 import menu from '@/composables/menu';
 const route = menu.route.value;
-console.log(route);
 </script>
 
 <style lang="scss" scoped></style>

@@ -13,3 +13,4 @@
 - `ResponseResult.d.ts`：声明后端返回接口类型的结构
 - `router.ts`：路由元信息提示的帮助文件
 - `menu.ts`：菜单类型的提示帮助文件
+- `typings.d.ts`：toastEditor markdown的类型的提示帮助文件
