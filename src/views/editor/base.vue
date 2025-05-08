@@ -1,13 +1,15 @@
 <template>
     <div>
-        基础编辑器
+        <wangEditor v-model="content" :height="300" />
+        {{ content }}
     </div>
 </template>
 
 <script setup lang="ts">
+import wangEditor from '@/components/wangEditor/editor.vue';
+import { ref } from 'vue';
 
+const content = ref('Hello world');
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,9 +1,12 @@
 <template>
-    <Editor v-model="content" :height="500" placeholder="请输入MarkDown内容"/>
+    <div>
+        <markEditor v-model="content" :height="500" placeholder="请输入MarkDown内容"/>
+        {{ content }}
+    </div>
 </template>
 
 <script setup lang="ts">
-import Editor from '@/components/markdown/editor.vue';
+import markEditor from '@/components/markdown/markEditor.vue';
 import { ref } from 'vue';
 
 const content = ref('# Hello World')

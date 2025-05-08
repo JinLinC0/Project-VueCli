@@ -1,5 +1,8 @@
 import { uploadImage } from "@/api/uploadApi";
 
+/**
+ * markdown编辑器组件的配置文件
+ */
 export default class {
     editor: toastui.Editor;
     constructor(el: string, initialValue: string, public height: string) {
