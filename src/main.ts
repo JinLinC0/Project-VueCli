@@ -3,6 +3,8 @@ import App from '@/App.vue'
 import router, { setupRouter } from '@/router'
 import { setupPlugins } from '@/plugins'
 import '@/styles/global.scss'
+import 'animate.css'  // 动画库样式的全局引入
+import "@toast-ui/editor/dist/toastui-editor.css";  // tosat-ui-editor编辑器样式的全局引入
 
 async function bootstrap() {
     const app = createApp(App)

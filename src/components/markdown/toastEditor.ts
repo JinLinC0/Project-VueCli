@@ -1,19 +1,20 @@
 import { uploadImage } from "@/api/uploadApi";
-
+// @ts-ignore
+import Editor from '@toast-ui/editor'   // 官方提供的 @toast-ui/editor 类型声明文件（.d.ts）有问题，在项目进行打包的时候会报错，所以通过注释 // @ts-ignore 来绕开类型检查
 /**
  * markdown编辑器组件的配置文件
  */
 export default class {
-    editor: toastui.Editor;
+    editor: Editor;
     constructor(el: string, initialValue: string, public height: string) {
-        this.editor = new toastui.Editor({
-            el: document.querySelector(el),
+        this.editor = new Editor({
+            el: document.querySelector(el)!,
             initialEditType: 'markdown',
             previewStyle: 'vertical',
             height: this.height,
             initialValue: initialValue,
             hideModeSwitch: true,   // 配置底部的模式切换按钮
-            toolbarItems: this.toolbar()  // 自定义工具条
+            toolbarItems: this.toolbar() as []  // 自定义工具条
         });
         this.ImageHook();
     }

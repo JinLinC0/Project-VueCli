@@ -13,7 +13,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    height: 300,
+    height: 100,
     modelValue: '',  // 父组件传递进来的值
     uploadImgServer: '/api/upload/image'
 })
