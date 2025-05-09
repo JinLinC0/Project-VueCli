@@ -11,7 +11,7 @@ export default [
                 code: 200,
                 message: '请求成功',
                 type: 'success',
-                data: new Array(10).fill(0).map((article, index) => {
+                data: new Array(10).fill(0).map((index) => {
                     return {
                         id: index + 1,
                         title: Random.ctitle(),    // 随机生成标题
