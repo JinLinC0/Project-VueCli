@@ -18,10 +18,9 @@
         <div class="flex justify-center items-center relative cursor-pointer">
             <Notification class="mr-5" />
             <div class="mr-5 cursor-pointer flex justify-center" @click="fullscreen">
-                <el-icon>
-                    <FullScreen />
-                </el-icon>
-            </div>
+                <el-icon v-if="isFullscreen"><ZoomOut /></el-icon>
+                <el-icon v-else><ZoomIn /></el-icon>
+            </div>       
 
             <div class="group relative">
                 <div class="flex items-center justify-center">
@@ -66,19 +65,17 @@ import utils from '@/utils';
 import menuStore from '@/composables/menu';
 import Notification from '@/components/notification.vue';
 import Breadcrumb from '@/components/breadcrumb.vue';
+import { ref } from 'vue';
 
 // 从全局状态中读取用户数据，在标签中可以直接使用全局状态中的数据
 const user = userStore();  // 全局状态相当于响应式的数据
 
+
+const isFullscreen = ref<boolean>(false);
 // 页面全屏方法
 const fullscreen = () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    }
+    isFullscreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    isFullscreen.value = !isFullscreen.value;
 }
 </script>
 
