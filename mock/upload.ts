@@ -9,7 +9,7 @@ export default [
             return {
                 code: 200,
                 message: '上传成功',
-                type: 'success',
+                status: 'success',
                 data: {
                     url: "/images/vuecli.svg",
                 }

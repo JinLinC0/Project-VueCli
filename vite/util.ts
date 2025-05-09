@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export function parseEnv(env: Record<string, any>): ViteEnv {
+export function parseEnv(env: Record<string, any>): importMetaEnv {
     // Record<string, any>输入的类型是字符串，返回的类型是any类型，原始什么类型就返回什么类型
     // 使用lodash包进行深拷贝
     const envs: any = _.cloneDeep(env)

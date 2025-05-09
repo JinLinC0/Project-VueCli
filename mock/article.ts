@@ -10,7 +10,7 @@ export default [
             return {
                 code: 200,
                 message: '请求成功',
-                type: 'success',
+                status: 'success',
                 data: new Array(10).fill(0).map((index) => {
                     return {
                         id: index + 1,

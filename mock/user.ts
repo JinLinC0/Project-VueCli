@@ -11,7 +11,7 @@ export default [
             return {
                 code: 200,
                 message: '请求成功',
-                type: 'success',
+                status: 'success',
                 data: {
                     name: "当前用户: jlc",
                     age: 24,
@@ -28,7 +28,7 @@ export default [
             return {
                 code: 200,
                 message: '登录成功',
-                type: 'success',
+                status: 'success',
                 data: {
                     token: Random.string(10),   // 模拟生成一个10位的随机字符串作为token
                 }
