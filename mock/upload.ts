@@ -8,6 +8,7 @@ export default [
         response: () => {
             return {
                 code: 200,
+                errno: 0,   // wangeditor 0 表示上传成功，1 表示上传失败
                 message: '上传成功',
                 status: 'success',
                 data: {

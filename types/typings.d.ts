@@ -11,11 +11,3 @@ declare namespace toastui {
         focus: () => void;
     }
 }
-
-// 富文本编辑器wangEditor的类型声明
-declare class wangEditor {
-    constructor(el: string);
-    create: () => void;
-    config: { [key: string]: any };
-    txt: { [key: string]: any };
-}

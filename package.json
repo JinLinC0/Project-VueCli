@@ -14,6 +14,8 @@
     "@types/node": "^22.13.10",
     "@vee-validate/i18n": "^4.15.0",
     "@vee-validate/rules": "^4.15.0",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
     "echarts": "^5.6.0",
@@ -26,7 +28,6 @@
     "vee-validate": "^4.15.0",
     "vue": "^3.4.37",
     "vue-router": "^4.5.0",
-    "wangeditor": "^4.7.15",
     "yup": "^1.6.1"
   },
   "devDependencies": {
