@@ -15,9 +15,8 @@ const router = createRouter({
 
 // 将路由封装成函数，实现具名导出
 export async function setupRouter(app: App) {
-    // 获取用户资料
-    const user = userStore()
-    await user.getUserInfo()
+    // 获取用户资料  在启动的时候，就加载用户信息
+    await userStore().getUserInfo()
     autoload(router)
     // 执行路由守卫函数，将路由传递过去
     guard(router)

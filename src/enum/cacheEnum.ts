@@ -6,4 +6,6 @@ export enum CacheEnum {
     REDIRECT_ROUTE_NAME = 'redirect_route_name',
     // 历史菜单
     HISTORY_MENU = 'history_menu',
+    // 左侧菜单的点击状态
+    MENU_IS_CLOSE = 'menu_is_close'
 }

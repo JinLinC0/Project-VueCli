@@ -2,13 +2,14 @@ import { IMenu } from "#/menu";
 import { CacheEnum } from "@/enum/cacheEnum";
 import router from "@/router";
 import utils from "@/utils";
+import store from "@/utils/store";
 import { ref } from "vue";
 import { RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw } from "vue-router";
 
 class Menu {
     public menus = ref<IMenu[]>([])
     public history = ref<IMenu[]>([])
-    public close = ref(false)  // 左侧菜单的展开和折叠状态，默认是展开的
+    public close = ref(store.get(CacheEnum.MENU_IS_CLOSE) ?? true)  // 左侧菜单的展开和折叠状态，默认是展开的
     public route = ref(null as null | RouteLocationNormalized)   // 用于面包屑组件的路由路径
 
     constructor() { }
@@ -81,6 +82,7 @@ class Menu {
     // 左侧主菜单的展开和折叠控制
     toggleCollapse() {
         this.close.value = !this.close.value
+        store.set(CacheEnum.MENU_IS_CLOSE, this.close.value)  // 将状态存储到本地
     }
     // 左侧主菜单的切换控制，父级菜单一个展示一个折叠
     toggleParentMenu(menu: IMenu) {
