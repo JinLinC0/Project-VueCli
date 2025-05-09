@@ -1,5 +1,5 @@
 <template>
-    <div id="editor"></div>
+    <div id="toast-editor"></div>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +23,7 @@ const emit = defineEmits(['update:modelValue']);
 
 // 等DOM渲染之后，再进行组件的渲染
 nextTick(() => {
-    const toastUi = new toastEditor('#editor', `${props.modelValue}`, `${props.height}px`)
+    const toastUi = new toastEditor('#toast-editor', `${props.modelValue}`, `${props.height}px`)
     toastUi.editor.on('change', (type: string) => {
         const content = type === 'markdown' ? toastUi.editor.getMarkdown() : toastUi.editor.getHTML()
         emit('update:modelValue', content)

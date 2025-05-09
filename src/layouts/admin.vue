@@ -13,7 +13,7 @@
             <div class="m-3 relative overflow-y-auto">
                 <router-view #default="{ Component }">
                     <!-- 添加跳转的过渡动画 -->
-                    <Transition appear class="animate__animated" 
+                    <Transition appear mode="out-in" class="animate__animated" 
                         enter-active-class="animate__fadeIn"
                         leave-active-class="animate__fadeOut">
                         <component :is="Component" class="absolute w-full" />

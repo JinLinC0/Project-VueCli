@@ -1,5 +1,5 @@
 <template>
-    <div id="editor"></div>
+    <div id="wang-editor"></div>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['update:modelValue'])
 
 nextTick(() => {
-    new wangEditor("#editor", (newHtml: string)=> {  // 回调函数，表单更新，将新值传递给父组件
+    new wangEditor("#wang-editor", (newHtml: string)=> {  // 回调函数，表单更新，将新值传递给父组件
         emit('update:modelValue', newHtml)
     }, props)
 })
