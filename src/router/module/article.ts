@@ -4,7 +4,7 @@ export default {
     name: 'article',
     path: '/article',
     component: () => import('@/layouts/admin.vue'),
-    meta: { auth: true, menu: { title: '文章列表', icon: 'Menu' } },
+    meta: { auth: true, menu: { title: '文章列表', icon: 'List' } },
     children: [
         {
             name: 'articleList',
