@@ -16,12 +16,6 @@ const routes = [
         meta: { guest: true }   // 游客才能访问，登录后就不能进行访问
     },
     {
-        // 文章页面路由
-        path: "/article",
-        name: "article",
-        component: () => import("@/views/article.vue"),
-    },
-    {
         // 404页面路由
         path: "/:any(.*)",
         name: "notFound",
