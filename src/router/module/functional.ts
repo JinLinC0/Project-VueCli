@@ -11,6 +11,12 @@ export default {
             path: 'digitalClock',
             component: () => import('@/views/functional/clock.vue'),
             meta: { menu: { title: '实时时间' } },
+        },
+        {
+            name: 'weather',
+            path: 'weather',
+            component: () => import('@/views/functional/weather.vue'),
+            meta: { menu: { title: '实时天气' } },
         }
     ]
 } as RouteRecordRaw
