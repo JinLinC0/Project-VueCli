@@ -27,8 +27,8 @@ const del = (index: number) => {
     padding: 20px;
     position: relative;
     background-color: aliceblue;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     ul {
         li {
