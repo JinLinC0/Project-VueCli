@@ -1,5 +1,7 @@
 <template>
-    <div id="toast-editor"></div>
+    <div class>
+        <div id="toast-editor"></div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +36,7 @@ nextTick(() => {
 <style lang="scss" scoped>
 #editor {
     @apply bg-white;
+
     .fullscreen {
         position: fixed;
         left: 0;

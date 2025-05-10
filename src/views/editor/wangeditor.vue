@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class>
         <wangEditor v-model="content" :height="300" />
-        {{ content }}
+        <div class="bg-gray-100 mt-3 border p-3">{{ content }}</div>
     </div>
 </template>
 

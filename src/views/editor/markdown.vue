@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class>
         <markEditor v-model="content" :height="500" placeholder="请输入MarkDown内容"/>
-        {{ content }}
+        <div class="bg-gray-100 mt-3 border p-3">{{ content }}</div>
     </div>
 </template>
 
