@@ -4,5 +4,12 @@
 
 该前端脚手架的开发涉及到以下的相关知识：`Vue`、`JavaScript`、`Typescirpt`、`ElementPlus`、`Pinia`、`TailwindCss`、`Mockjs`、`Axios`、`Vue-router`、`wangeditor`和`toastEditor`等
 
-具体的页面呈现：
+具体的页面呈现：界面做了移动端和电脑端的设计，支持多端展示
 
+![image-20250510150523131](public/image-20250510150523131.png)
+
+![image-20250510150419597](public\image-20250510150419597.png)
+
+![image-20250510150434138](public/image-20250510150434138.png)
+
+![image-20250510150548533](public/image-20250510150548533.png)
