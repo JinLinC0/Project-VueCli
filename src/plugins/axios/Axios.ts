@@ -1,3 +1,6 @@
+import { CacheEnum } from "@/enum/cacheEnum"
+import router from "@/router"
+import store from "@/utils/store"
 import axios, { AxiosRequestConfig } from "axios"
 
 // 对axios进行配置
@@ -35,6 +38,7 @@ export default class Axios {
     private interceptorsRequest() {
         this.instance.interceptors.request.use(
             config => {
+                config.headers.Authorization = "Bearer " + store.get(CacheEnum.TOKEN_NAME);
                 return config
             },
             error => {
@@ -50,6 +54,13 @@ export default class Axios {
                 return response
             },
             error => {
+                switch (error.response.status) {
+                    // token过期出现的错误，需要重新登录
+                    case 401:
+                        store.remove(CacheEnum.TOKEN_NAME)
+                        router.push({ name: 'login' })
+                        break
+                }
                 return Promise.reject(error)
             }
         )

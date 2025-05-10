@@ -1,4 +1,5 @@
 <template>
+    <!--使用组件的方式进行规则的验证-->
     <Form class="bg-slate-400 h-screen flex justify-center md:items-center p-5" @submit="onSubmit" :validation-schema="schema">
         <div class="w-[720px] bg-slate-100 md:-translate-y-16 md:grid grid-cols-2 rounded-md shadow-2xl overflow-hidden">
             <div class="hidden md:block relative">

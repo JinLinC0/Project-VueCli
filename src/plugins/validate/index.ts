@@ -18,6 +18,4 @@ Object.entries(all).forEach(([name, rule]) => {
     veeValidate.defineRule(name, rule)
 })
 
-const modules = { yup, ...veeValidate }
-
-export default modules
+export default { yup, ...veeValidate }

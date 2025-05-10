@@ -14,7 +14,7 @@ function autoload(router: Router) {
     routes = routes.map(route => {
         route.children = route.children?.filter(r => {
             const permission = r.meta?.permission
-            return permission ? user.info?.permissions.includes(permission) : true
+            return permission ? user.info?.permissions?.includes(permission) : true
         })
         return route
     })
